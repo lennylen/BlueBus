@@ -3083,3 +3083,19 @@ void IBusCommandTELStatusText(IBus_t *ibus, char *text, uint8_t index)
     memcpy(statusText + 3, text, textLength);
     IBusSendCommand(ibus, IBUS_DEVICE_TEL, IBUS_DEVICE_ANZV, statusText, sizeof(statusText));
 }
+
+/**
+ * IBusCommandCarplayDisplay()
+ *     Description:
+ *        Send telephone status text
+ *     Params:
+ *         IBus_t *ibus - The pointer to the IBus_t object
+ *         uint8_t enable - 0 / 1 - on / off
+ *     Returns:
+ *         void
+ */
+void IBusCommandCarplayDisplay(IBus_t *ibus, uint8_t enable)
+{
+    uint8_t pkt[] = { IBUS_BLUEBUS_CMD_CARPLAY_MODE, 0xBB, enable };
+    IBusSendCommand(ibus, IBUS_DEVICE_CDC, IBUS_DEVICE_VM, pkt, sizeof(pkt));
+}
